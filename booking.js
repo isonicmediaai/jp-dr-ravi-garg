@@ -24,7 +24,7 @@
   }
 
   function thankYouHref() {
-    return /\.dc\.html$/i.test(location.pathname) ? 'Thank You Booking.dc.html' : 'thank-you-booking.html';
+    return /\.dc\.html$/i.test(location.pathname) ? 'Thank You Booking.dc.html' : '/thank-you-booking';
   }
 
   var css = `
