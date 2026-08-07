@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') { http_response_code(204); exit; }
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') { http_response_code(405); echo json_encode(['ok' => false, 'error' => 'Method not allowed']); exit; }
 
 // ---- CONFIG -----------------------------------------------------------
-$HOSPITAL_EMAIL = 'care@jphospitals.in, varun.blogs@gmail.com, parth.gulati@isonicmedia.in';   // <-- change if you want leads sent elsewhere
+$HOSPITAL_EMAIL = 'care@jphospitals.in, varun.blogs@gmail.com';   // <-- change if you want leads sent elsewhere
 $SITE_NAME      = 'Dr. Ravi Garg, JP Hospital Zirakpur';
 // SMTP via Gmail — sender account + app password (Google Account -> Security ->
 // 2-Step Verification -> App passwords). NOT the normal Gmail password.
