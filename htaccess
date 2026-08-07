@@ -1,24 +1,23 @@
-# RENAME THIS FILE TO  .htaccess  (with the leading dot) in the repo root.
 RewriteEngine On
 
 # Force HTTPS
 RewriteCond %{HTTPS} !=on
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# Redirect /page.html -> /page (clean URLs)
+# /page.html -> /page
 RewriteCond %{THE_REQUEST} \s/([^\s?]+)\.html[\s?] [NC]
 RewriteRule ^ /%1 [L,R=301]
 
-# Redirect /index -> /
+# /index -> /
 RewriteRule ^index$ / [L,R=301]
 
-# Serve /page from page.html internally
+# Serve /page from page.html
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^(.+)$ $1.html [L]
 
-# Block direct access to leads.csv
-<Files "leads.csv">
-  Require all denied
-</Files>
+<FilesMatch "^leads\.csv$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
