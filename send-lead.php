@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') { http_response_code(204); exit; }
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') { http_response_code(405); echo json_encode(['ok' => false, 'error' => 'Method not allowed']); exit; }
 
 // ---- CONFIG -----------------------------------------------------------
-$HOSPITAL_EMAIL = 'care@jphospitals.in, varun.blogs@gmail.com';
+$HOSPITAL_EMAIL = 'care@jphospitals.in, varun.blogs@gmail.com, parth.gulati@isonicmedia.in';
 $FROM_EMAIL     = 'no-reply@' . ($_SERVER['HTTP_HOST'] ?? 'drravigarg.com');
 $SITE_NAME      = 'Dr. Ravi Garg, JP Hospital Zirakpur';
 // -------------------------------------------------------------------------
