@@ -268,6 +268,8 @@ textarea{resize:vertical;min-height:52px;line-height:1.55}
 
       try {
         sessionStorage.setItem('rg_lead_name', name);
+        sessionStorage.setItem('rg_lead_date', iso(this._date));
+        sessionStorage.setItem('rg_lead_label', this._label || '');
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
           event: 'appointment_booked', page: 'booking_modal', source: this._source || '',
@@ -277,7 +279,7 @@ textarea{resize:vertical;min-height:52px;line-height:1.55}
 
       try {
         fetch('./send-lead.php', {
-          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, keepalive: true,
           body: JSON.stringify({
             type: 'booking', name: name, email: email, phone: phone, notes: notes,
             date: iso(this._date), label: this._label || '', source: this._source || '',
@@ -285,11 +287,7 @@ textarea{resize:vertical;min-height:52px;line-height:1.55}
         }).catch(function () { /* lead still confirmed client-side, redirect proceeds */ });
       } catch (err) { /* fetch unavailable */ }
 
-      var qs = new URLSearchParams({
-        name: name, email: email, phone: phone, notes: notes,
-        date: iso(this._date), time: this._time, label: this._label || '',
-      });
-      location.href = thankYouHref() + '?' + qs.toString();
+      location.href = thankYouHref();
     }
 
     disconnectedCallback() { document.removeEventListener('keydown', this._onKey); }

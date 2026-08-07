@@ -371,8 +371,8 @@ class Component extends DCLogic {
     let dateText = '', timeText = '';
     try {
       const q = new URLSearchParams(location.search);
-      timeText = q.get('label') || '';
-      const raw = q.get('date');
+      timeText = q.get('label') || sessionStorage.getItem('rg_lead_label') || '';
+      const raw = q.get('date') || sessionStorage.getItem('rg_lead_date');
       if (raw) {
         const d = new Date(raw + 'T00:00:00');
         if (!isNaN(d)) {

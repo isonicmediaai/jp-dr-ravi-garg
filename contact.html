@@ -495,12 +495,11 @@ class Component extends DCLogic {
         const name = (s.name || '').trim();
         try { sessionStorage.setItem('rg_lead_name', name); } catch (err) { /* storage blocked */ }
         fetch('./send-lead.php', {
-          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, keepalive: true,
           body: JSON.stringify({ type: 'contact', name, email: s.email, phone: s.phone, topic: s.topic, message: s.message, source: 'contact_form' }),
         }).catch(() => { /* lead still stored client-side via dataLayer/redirect */ });
         this.setState({ sent: true });
-        const q = name ? '?name=' + encodeURIComponent(name) : '';
-        setTimeout(() => { location.href = '/thank-you' + q; }, 450);
+        setTimeout(() => { location.href = '/thank-you'; }, 450);
       },
       onReset: () => this.setState({ sent: false, message: '' }),
       channels: [
